@@ -2,7 +2,7 @@ module "root_compartment" {
   source = "Terraform-Modules-Lib/compartment/oci"
   
   # Pinning a specific version
-  version = "~> 2.0.2"
+  version = "~> 3.0.0"
   
   # Requiring a oci provider pointing to home region
   providers = {
