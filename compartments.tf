@@ -9,8 +9,15 @@ module "root_compartment" {
     oci = oci.home
   }
   
-  name = "sisal-fan-club"
   parent_ocid = var.oci_tenancy_id
-
+  
+  name = "sisal-fan-club"
+  description = "Sisal Fan Club"
+  freeform_tags = {
+    factory = "digital"
+    app_code = "nsfc"
+    managed-by = "terraform cloud"
+  }
+  
   manage = true
 }
