@@ -40,7 +40,7 @@ resource "oci_identity_policy" "compartment_admins" {
     description = "Grants for group adminstrators of compartment ${module.root_compartment.oci-compartment.name} (${oci_identity_group.compartment_admins.name})"
     statements = [
       "Allow group ${oci_identity_group.compartment_admins.name} to use users in tenancy",
-      "Allow group ${oci_identity_group.compartment_admins.name} to manage groups in tenancy where target.group.name ='${oci_identity_group.compartment_admins.name}'",
+      "Allow group ${oci_identity_group.compartment_admins.name} to manage groups in tenancy where target.group.name = '${oci_identity_group.compartment_admins.name}'",
       "Allow group ${oci_identity_group.compartment_admins.name} to manage policies where target.compartment.name = '${module.root_compartment.oci-compartment.name}'",
       "Allow group ${oci_identity_group.compartment_admins.name} to manage all-resources in compartment ${module.root_compartment.oci-compartment.name}"
     ]
