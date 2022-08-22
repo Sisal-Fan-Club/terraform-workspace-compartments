@@ -23,6 +23,8 @@ module "root_compartment" {
 }
   
 resource "oci_identity_group" "compartment_admins" {
+    provider = oci.home
+  
     compartment_id = var.oci_tenancy_id
 
     name = "${module.root_compartment.oci-compartment.name}-admins"
@@ -30,6 +32,8 @@ resource "oci_identity_group" "compartment_admins" {
 }
 
 resource "oci_identity_policy" "compartment_admins" {
+    provider = oci.home
+  
     compartment_id = var.oci_tenancy_id
   
     name = oci_identity_group.compartment_admins.name
