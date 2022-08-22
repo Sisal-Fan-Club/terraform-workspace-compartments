@@ -10,12 +10,12 @@ terraform {
 
 # OCI regional provider
 provider "oci" {
-  tenancy_ocid = var.tenancy_ocid
-  region = var.region
+  tenancy_ocid = var.oci_tenancy_id
+  user_ocid = var.oci_user_id
+  private_key = var.oci_private_key
+  fingerprint = var.oci_key_fingerprint
   
-  user_ocid = var.user_ocid
-  private_key = var.private_key
-  fingerprint = var.fingerprint
+  region = var.oci_region_name
 }
 
 # Find home region
@@ -33,6 +33,7 @@ data "oci_identity_regions" "home" {
 # OCI home provider
 provider "oci" {
   alias = "home"
+  
   tenancy_ocid = var.oci_tenancy_id
   user_ocid = var.oci_user_id
   private_key = var.oci_private_key
