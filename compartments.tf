@@ -45,8 +45,8 @@ resource "oci_identity_policy" "root_admin_policy" {
   statements = [
     "Allow group ${local.root_admins.name} to use users in tenancy",
     "Allow group ${local.root_admins.name} to manage groups in tenancy where target.group.name = '${local.root_admins.name}'",
-    "Allow group ${local.root_admins.name} to manage policies in compartment id ${local.root_compartment.id}",
-    "Allow group ${local.root_admins.name} to manage all-resources in compartment id ${local.root_compartment.id}",
+#    "Allow group ${local.root_admins.name} to manage policies in compartment id ${local.root_compartment.id}",
+    "Allow group ${local.root_admins.name} to manage policies in tenancy where target.compartment.id = '${local.root_compartment.id}'",
   ]
   
   freeform_tags = {
