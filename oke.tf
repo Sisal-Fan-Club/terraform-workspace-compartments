@@ -3,7 +3,7 @@ locals {
 }
 
 resource "oci_containerengine_cluster" "test_oke" {
-  compartment_id = local.test.compartment.id
+  compartment_id = local.test_compartment.id
   
   vcn_id = local.vcn.id
   
