@@ -13,9 +13,4 @@ resource "oci_containerengine_cluster" "test_oke" {
     subnet_id = local.test_subnet_public.id
     is_public_ip_enabled = true
   }
-  
-  service_lb_subnet_ids = [
-    local.test_subnet_public.id
-  ]
-  
 }
