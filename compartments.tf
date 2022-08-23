@@ -36,11 +36,11 @@ module "test_compartment" {
     oci = oci.home
   }
   
-  parent_ocid = module.root_compartment.oci-compartment.id
+  parent_ocid = module.root_compartment.oci_compartment.id
   tenancy_ocid = var.oci_tenancy_id
   
-  name = "${module.root_compartment.oci-compartment.name}-test"
-  description = "${module.root_compartment.oci-compartment.description} - Test Environment"
+  name = "${module.root_compartment.oci_compartment.name}-test"
+  description = "${module.root_compartment.oci_compartment.description} - Test Environment"
   freeform_tags = {
     environment = "test"
   }
