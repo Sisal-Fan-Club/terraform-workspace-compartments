@@ -75,12 +75,13 @@ resource "oci_identity_group" "root_opers" {
 resource "oci_identity_policy" "root_opers_policy" {
   provider = oci.home
   
-  compartment_id = var.oci_tenancy_id
+  compartment_id = local.root_compartment.id
   
   name = "${local.root_opers.name}"
   description = "Permissions for compartment ${local.root_compartment.name}'s operators group (${local.root_opers.name})."
   
   statements = [
+    "Allow group ${local.root_opers.name} to use all-resource in compartment id ${local.root_compartment.id}",
   ]
   
   freeform_tags = {
