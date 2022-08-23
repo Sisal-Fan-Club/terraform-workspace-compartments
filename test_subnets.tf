@@ -9,6 +9,7 @@ resource "oci_core_subnet" "test_subnet_private" {
   
   display_name = "${local.test_compartment.description} - Private Network"
   cidr_block = "10.0.10.0/24"
+  prohibitInternetIngress = true
   
   freeform_tags = merge({
   }, local.vcn.freeform_tags, local.test_compartment.freeform_tags)
