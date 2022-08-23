@@ -81,7 +81,7 @@ resource "oci_identity_policy" "root_opers_policy" {
   description = "Permissions for compartment ${local.root_compartment.name}'s operators group (${local.root_opers.name})."
   
   statements = [
-    "Allow group ${local.root_opers.name} to use all-resource in compartment id ${local.root_compartment.id}",
+    "Allow group ${local.root_opers.name} to use instance-family in compartment id ${local.root_compartment.id}",
   ]
   
   freeform_tags = {
