@@ -1,6 +1,6 @@
 locals {
   test_oke = try(oci_containerengine_cluster.test_oke, "")
-  test_oke_kubeconfig = try(oci_containerengine_cluster_kube_config.test_oke_kubeconfig, "")
+  test_oke_kubeconfig = try(data.oci_containerengine_cluster_kube_config.test_oke_kubeconfig, "")
 }
 
 output "debug" {
