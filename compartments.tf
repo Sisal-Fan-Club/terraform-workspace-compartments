@@ -83,6 +83,7 @@ resource "oci_identity_policy" "root_opers_policy" {
   
   statements = [
     "Allow group ${local.root_opers.name} to read virtual-network-family in compartment id ${local.root_compartment.id}",
+    "Allow group ${local.root_opers.name} to manage subnets in compartment id ${local.root_compartment.id} where target.compartment.id != '${local.root_compartment.id}'",
   ]
   
   freeform_tags = {
