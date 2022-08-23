@@ -33,3 +33,7 @@ resource "oci_containerengine_cluster" "test_oke" {
   freeform_tags = merge({
   }, local.test_compartment.freeform_tags)
 }
+
+data "oci_containerengine_cluster_kube_config" "test_oke_kubeconfig" {
+  cluster_id = local.test_oke.id
+}
