@@ -17,6 +17,8 @@ resource "oci_identity_compartment" "root_compartment" {
     managed-by = "terraform cloud"
     app_code = "nsfc"
   }
+  
+  enable_delete = true
 }
 
 resource "oci_identity_group" "root_admins" {
