@@ -1,5 +1,6 @@
 locals {
   root_compartment = try(oci_identity_compartment.root_compartment, "")
+  test_compartment = try(oci_identity_compartment.test_compartment, "")
   
   root_admins = try(oci_identity_group.root_admins, "")
   root_opers = try(oci_identity_group.root_opers, "")
@@ -88,4 +89,20 @@ resource "oci_identity_policy" "root_opers_policy" {
     group = "${local.root_opers.name}"
     compartment = "${local.root_compartment.id}"
   }
+}
+
+
+resource "oci_identity_compartment" "test_compartment" {
+  provider = oci.home
+  
+  compartment_id = local.root_compartment.id
+  
+  name = "${local.root_compartment.name}-test"
+  description = "${local.root_compartment.description} - Test Environment"
+  
+  freeform_tags = merge({
+    environment = "test"
+  }, local.root_compartment.freeform_tags)
+  
+  enable_delete = true
 }
