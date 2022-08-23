@@ -1,8 +1,9 @@
 module "root_compartment" {
-  source = "Terraform-Modules-Lib/compartment/oci"
+  #source = "Terraform-Modules-Lib/compartment/oci"
+  source = "github.com/Terraform-Modules-Lib/terraform-oci-compartment"
   
   # Pinning a specific version
-  version = "~> 4"
+  #version = "~> 4"
   
   # Requiring a oci provider pointing to home region
   providers = {
@@ -24,10 +25,11 @@ module "root_compartment" {
 }
 
 module "test_compartment" {
-  source = "Terraform-Modules-Lib/compartment/oci"
+  #source = "Terraform-Modules-Lib/compartment/oci"
+  source = "github.com/Terraform-Modules-Lib/terraform-oci-compartment"
   
   # Pinning a specific version
-  version = "~> 4"
+  #version = "~> 4"
   
   # Requiring a oci provider pointing to home region
   providers = {
