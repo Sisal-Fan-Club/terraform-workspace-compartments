@@ -40,3 +40,32 @@ resource "oci_core_nat_gateway" "egress_gateway" {
   freeform_tags = merge({
   }, local.vcn.freeform_tags)
 }
+
+data "oci_core_services" "oci_services" {
+  filter {
+    name = "name"
+    values = ["^All .* Services In Oracle Services Network"]
+    regex = true
+  }
+}
+
+resource "oci_core_service_gateway" "service_gateway" {
+  compartment_id = local.vcn.compartment_id
+  
+  vcn_id = local.vcn.id
+
+  display_name = "${local.vcn.display_name} - Oracle Cloud Services Gateway"
+
+  dynamic "services" {
+    for_each = { for service in data.oci_core_services.oci_services.services:
+      service.id => service
+    }
+
+    content {
+      service_id = services.value.id
+    }
+  }
+
+  freeform_tags = merge({
+  }, local.vcn.freeform_tags)
+}
