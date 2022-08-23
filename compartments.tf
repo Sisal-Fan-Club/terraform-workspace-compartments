@@ -1,5 +1,7 @@
 locals {
   root_compartment = try(oci_identity_compartment.root_compartment, "")
+  root_admins = try(oci_identity_group.root_admins, "")
+  root_admin_policy = try(oci_identity_policy.root_admin_policy, "")
 }
 
 resource "oci_identity_compartment" "root_compartment" {
@@ -35,15 +37,18 @@ resource "oci_identity_policy" "root_admin_policy" {
   
   compartment_id = var.oci_tenancy_id
   
-  name = "${oci_identity_group.root_admins.name}"
-  description = "Permissions for compartment ${local.root_compartment.name}'s administrators group (${oci_identity_group.root_admins.name})."
+  name = "${local.root_admins.name}"
+  description = "Permissions for compartment ${local.root_compartment.name}'s administrators group (${local.root_admins.name})."
   
   statements = [
-    "Allow group ${oci_identity_group.root_admins.name} to use users in tenancy",
-    "Allow group ${oci_identity_group.root_admins.name} to manage groups in tenancy where target.group.name = '${oci_identity_group.root_admins.name}'",
-    "Allow group ${oci_identity_group.root_admins.name} to manage policies in compartment id ${local.root_compartment.id}",
-    "Allow group ${oci_identity_group.root_admins.name} to manage all-resources in compartment id ${local.root_compartment.id}",
+    "Allow group ${local.root_admins.name} to use users in tenancy",
+    "Allow group ${local.root_admins.name} to manage groups in tenancy where target.group.name = '${local.root_admins.name}'",
+    "Allow group ${local.root_admins.name} to manage policies in compartment id ${local.root_compartment.id}",
+    "Allow group ${local.root_admins.name} to manage all-resources in compartment id ${local.root_compartment.id}",
   ]
   
-  
+  freeform_tags = {
+    group = "${local.root_admins.name}"
+    compartment = "${local.root_compartment.id}"
+  }
 }
