@@ -69,3 +69,16 @@ resource "oci_core_service_gateway" "service_gateway" {
   freeform_tags = merge({
   }, local.vcn.freeform_tags)
 }
+
+
+resource "oci_core_default_security_list" "default_security_list" {
+  compartment_id = local.vcn.compartment_id
+  
+  vcn_id = local.vcn.id
+  
+  ingress_security_rules {
+  }
+  
+  egress_security_rules {
+  }
+}
