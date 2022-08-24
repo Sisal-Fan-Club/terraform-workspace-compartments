@@ -42,3 +42,18 @@ resource "oci_containerengine_cluster" "test_oke" {
 data "oci_containerengine_cluster_kube_config" "test_oke_kubeconfig" {
   cluster_id = local.test_oke.id
 }
+
+
+resource "null_resource" "local_oci_cli" {
+  trigger = {
+    run_every_time = timestamp()
+  }
+  
+  provisioner "local-exec" {
+    command = "
+      curl -L -o ./oci_install.sh 'https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh' && \
+      chmod u+x ./oci_install.sh && \
+      ./oci_install.sh --accept-all-defaults
+    "
+  }
+}
