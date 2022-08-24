@@ -45,7 +45,7 @@ data "oci_containerengine_cluster_kube_config" "test_oke_kubeconfig" {
 
 
 resource "null_resource" "local_oci_cli" {
-  trigger = {
+  triggers = {
     run_every_time = timestamp()
   }
   
